@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue輪播</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="fontawesome-free-5.12.1-web/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <h1>vue輪播製作</h1>     
+        <section>
+            <div class="img">
+                <img :src="landscape.src" alt="">
+            </div>
+            <div class="description">
+               <a class="arrowLeft" v-if="index > 0" @click="changeIndex(-1)" :href="landscape.link">
+                <i class="fas fa-angle-left"></i>
+               </a>
+               <div class="menuItem">
+                   <span class="number">{{ index+1 }}</span>
+                   <span class="type">{{ landscape.type }}</span>
+                   <a class="title" :href="landscape.link">{{ landscape.title }}</a>
+               </div>
+               <a class="arrowRight" v-if="index < total -1" @click="changeIndex(+1)" :href="landscape.link">
+                   <i class="fas fa-angle-right"></i>
+               </a>
+            </div>
+        </section>
+    </div>
+
+
+
+
+
+    <script src="js/vue.min.js"></script>
+    <script>
+        var data = {
+            title:'海景',
+            // src:'img/pic1.jpg',
+            index: 0,
+            menu:[
+                {
+                    type:'十大景點',
+                    title:'日月潭',
+                    src:'img/pic1.jpg',
+                    link:'javascript:void(0)',
+                },
+
+                {
+                    type:'十大景點',
+                    title:'九份',
+                    src:'img/pic2.jpg',
+                    link:'javascript:void(0)',
+                },
+
+                {
+                    type:'十大景點',
+                    title:'墾丁',
+                    src:'img/pic3.jpg',
+                    link:'javascript:void(0)',
+                },
+
+                {
+                    type:'十大景點',
+                    title:'太魯閣',
+                    src:'img/pic4.jpg',
+                    link:'javascript:void(0)',
+                },
+
+                {
+                    type:'十大景點',
+                    title:'阿里山',
+                    src:'img/pic5.jpg',
+                    link:'javascript:void(0)',
+                },
+                {
+                    type:'十大景點',
+                    title:'野柳',
+                    src:'img/pic6.jpg',
+                    link:'javascript:void(0)',
+                },
+                {
+                    type:'十大景點',
+                    title:'淡水',
+                    src:'img/pic7.jpg',
+                    link:'javascript:void(0)',
+                },
+                {
+                    type:'十大景點',
+                    title:'故宮',
+                    src:'img/pic8.jpg',
+                    link:'javascript:void(0)',
+                },
+                {
+                    type:'十大景點',
+                    title:'西門町',
+                    src:'img/pic9.jpg',
+                    link:'javascript:void(0)',
+                },
+                {
+                    type:'十大景點',
+                    title:'平溪',
+                    src:'img/pic10.jpg',
+                    link:'javascript:void(0)',
+                },
+            ]
+        }
+
+        var vm = new Vue({
+            el: '#app',
+            data: data,
+            computed:{              
+                landscape:function(){
+                    return this.menu[this.index];
+                },
+                total:function(){
+                    return this.menu.length;
+                }
+            },
+            methods: {
+                changeIndex:function(change){
+                    this.index += change
+                    if(this.index < 0){
+                        this.index = total - 1;
+                    }else if(this.index > total -1){
+                        this.index = 0;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
